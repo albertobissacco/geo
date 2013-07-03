@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=620">
+<title>Geolocation</title>
+<link rel="stylesheet" href="">
+</head>
+<body>
+  <header>
+    <h1>Geolocation</h1>
+  </header>
+  <div id="Output"></div>
+  <script>
+    navigator.geolocation.getCurrentPosition(
+    gotPosition,
+    errorGettingPosition,
+      {'enableHighAccuracy':true,'timeout':10000,'maximumAge':0});
+
+
+    function gotPosition(pos)
+    {
+    var outputStr =
+      "latitude:"+ pos.coords.latitude +"<br>"+
+      "longitude:"+ pos.coords.longitude +"<br>"+
+      "accuracy:"+ pos.coords.accuracy +"<br>"+
+
+      "altitude:"+ pos.coords.altitude +"<br>"+
+      "altitudeAccuracy:"+ pos.coords.altitudeAccuracy +"<br>"+
+      "heading:"+ pos.coords.heading +"<br>"+
+      "speed:"+ pos.coords.speed +"";
+
+      document.getElementById("Output").innerHTML=outputStr;
+    }
+
+    function errorGettingPosition(err)
+    {
+      if(err.code==1)
+      {
+        alert("User denied geolocation.");
+      }
+      else if(err.code==2)
+      {
+        alert("Position unavailable.");
+      }
+      else if(err.code==3)
+      {
+        alert("Timeout expired.");
+      }
+      else
+      {
+        alert("ERROR:"+ err.message);
+      }
+    }
+
+  </script>
+</body>
+</html>
