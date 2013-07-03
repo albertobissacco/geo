@@ -13,7 +13,7 @@
   <div id="Output"></div>
   <script>
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+    var watchid = navigator.geolocation.watchPosition(
     gotPosition,
     errorGettingPosition,
       {'enableHighAccuracy':true,'timeout':10000,'maximumAge':0});
@@ -21,7 +21,8 @@
   else {
     alert("Geolocation is not supported by this browser");
     }
-
+    
+  navigator.geolocation.clearWatch(watchid);
 
     function gotPosition(pos)
     {
@@ -58,12 +59,6 @@
       }
     }
 
-  var watchid = navigator.geolocation.watchPosition(
-  gotPosition,
-  errorGettingPosition,
-  {'enableHighAccuracy':true,'timeout':10000,'maximumAge':20000});
-
-  navigator.geolocation.clearWatch(watchid);
   </script>
 </body>
 </html>
